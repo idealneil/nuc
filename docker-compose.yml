@@ -25,6 +25,18 @@ services:
       - no-new-privileges:true
     restart: unless-stopped
 
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_INCLUDE_STOPPED=true
+      - WATCHTOWER_POLL_INTERVAL=3600
+      - TZ=Pacific/Auckland
+    volumes:
+       - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
   tailscale:
     image: tailscale/tailscale
     container_name: tailscaled

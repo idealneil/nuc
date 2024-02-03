@@ -134,3 +134,18 @@ services:
     ports:
       - '7878:7878'
     restart: unless-stopped
+
+  metube:
+    image: ghcr.io/alexta69/metube
+    container_name: metube
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - DELETE_FILE_ON_TRASHCAN=true
+      - YTDL_OPTIONS={"cookiefile":"/cookies/cookies.txt"}
+    volumes:
+      - /home/nuc/media/metube:/downloads
+      - /home/nuc/media/metube/cookies:/cookies
+    ports:
+      - '5992:8081'
+    restart: unless-stopped

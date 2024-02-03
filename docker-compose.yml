@@ -60,6 +60,24 @@ services:
       - /dev/dri:/dev/dri
     restart: unless-stopped
 
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Pacific/Auckland
+      - VERSION=docker
+      - PLEX_CLAIM= #optional
+    volumes:
+      - /home/nuc/appdata/plex:/config
+      - /home/nuc/media/tv:/tv
+      - /home/nuc/media/movies:/movies
+    devices:
+      - /dev/dri:/dev/dri
+    restart: unless-stopped
+
   sabnzbd:
     image: lscr.io/linuxserver/sabnzbd:latest
     container_name: sabnzbd
@@ -88,4 +106,19 @@ services:
       - /home/nuc/downloads/complete:/downloads
     ports:
       - '8989:8989'
+    restart: unless-stopped
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Pacific/Auckland
+    volumes:
+      - /home/nuc/appdata/radarr:/config
+      - /home/nuc/media/movies:/movies
+      - /home/nuc/downloads/complete:/downloads
+    ports:
+      - '7878:7878'
     restart: unless-stopped

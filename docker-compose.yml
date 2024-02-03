@@ -3,7 +3,6 @@ services:
   nginxproxymanager:
     image: 'jc21/nginx-proxy-manager:latest'
     container_name: nginxproxymanager
-    restart: unless-stopped
     ports:
       - '80:80'
       - '81:81'
@@ -11,34 +10,6 @@ services:
     volumes:
       - /home/nuc/appdata/nginx/data:/data
       - /home/nuc/appdata/nginx/letsencrypt:/etc/letsencrypt
-
-  nextcloud:
-    image: lscr.io/linuxserver/nextcloud:latest
-    container_name: nextcloud
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Pacific/Auckland
-    volumes:
-      - /home/nuc/appdata/nextcloud/appdata:/config
-      - /home/nuc/appdata/nextcloud/data:/data
-    restart: unless-stopped
-
-  mariadb:
-    image: lscr.io/linuxserver/mariadb:latest
-    container_name: mariadb
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Pacific/Auckland
-      - MYSQL_ROOT_PASSWORD=yourpassword
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_PASSWORD=yourpassword
-    volumes:
-      - /home/nuc/appdata/mariadb:/config
-    ports:
-      - '3306:3306'
     restart: unless-stopped
 
   file-browser:

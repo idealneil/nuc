@@ -40,7 +40,7 @@ services:
       - TS_STATE_DIR=/var/lib/tailscale
       #- TS_EXTRA_ARGS=--advertise-exit-node #uncomment if needed for this device
       #- TS_ROUTES=192.168.1.0/24 #uncomment if needed for this device
-    restart: unless_stopped
+    restart: unless-stopped
 
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
